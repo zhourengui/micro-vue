@@ -25,3 +25,5 @@ if (!window.__GARFISH__) {
   const vueInstance = createApp(App);
   vueInstance.mount(document.querySelector("#app") as Element);
 }
+
+window.name = "heihei12";
