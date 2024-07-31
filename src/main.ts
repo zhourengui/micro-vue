@@ -1,29 +1,8 @@
-import { createApp, h } from "vue";
-import "./style.css";
-import App from "./App.vue";
-import { vueBridge } from "@garfish/bridge-vue-v3";
-import { createRouter, createWebHistory } from "vue-router";
+import { createApp } from 'vue';
 
-function newRouter(basename: string) {
-  const router = createRouter({
-    history: createWebHistory(basename),
-    routes: [],
-  });
-  return router;
-}
+import App from './App.vue';
 
-export const provider = vueBridge({
-  rootComponent: App,
-  appOptions: ({ basename }) => ({
-    el: "#app",
-    render: () => h(App),
-    router: newRouter(basename),
-  }),
-});
+import './style.css';
 
-if (!window.__GARFISH__) {
-  const vueInstance = createApp(App);
-  vueInstance.mount(document.querySelector("#app") as Element);
-}
-
-window.name = "heihei12";
+const vueInstance = createApp(App);
+vueInstance.mount(document.querySelector('#app') as Element);
