@@ -1,18 +1,28 @@
 <script setup lang="ts">
+import { storeToRefs } from "pinia";
 import HelloWorld from "./components/HelloWorld.vue";
+import { useGlobalDataStore } from "./stores/global-data-store";
+import { useMicroApp } from "./micro-app/hooks/use-micro-app";
+
+const { globalData } = storeToRefs(useGlobalDataStore());
+
+useMicroApp();
 </script>
 
 <template>
   <div class="flex flex-col items-center">
-    <div>
-      <a href="https://vitejs.dev" target="_blank">
-        <img src="/vite.svg" class="logo" alt="Vite logo" />
-      </a>
-      <a href="https://vuejs.org/" target="_blank">
-        <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-      </a>
+    <div>GlobalData: {{ JSON.stringify(globalData) }}</div>
+    <div class="flex flex-col items-center">
+      <div>
+        <a href="https://vitejs.dev" target="_blank">
+          <img src="/vite.svg" class="logo" alt="Vite logo" />
+        </a>
+        <a href="https://vuejs.org/" target="_blank">
+          <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
+        </a>
+      </div>
+      <HelloWorld msg="Vite + Vue" />
     </div>
-    <HelloWorld msg="Vite + Vue" />
   </div>
 </template>
 
