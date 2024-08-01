@@ -1,8 +1,12 @@
-import { createApp } from 'vue';
+import { createApp } from "vue";
 
-import App from './App.vue';
+import App from "./App.vue";
 
-import './style.css';
+import "./style.css";
 
-const vueInstance = createApp(App);
-vueInstance.mount(document.querySelector('#app') as Element);
+const instance = createApp(App);
+instance.mount(document.querySelector("#app")!);
+
+window.unmount = () => {
+  instance.unmount();
+};
