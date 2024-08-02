@@ -12,7 +12,8 @@ const { microAppCommunicationState } = storeToRefs(
 <template>
   <MicroAppContextProvider>
     <div class="flex flex-col items-center">
-      MicroAppCommunication: {{ JSON.stringify(microAppCommunicationState) }}
+      MicroAppCommunication:
+      {{ JSON.stringify(microAppCommunicationState, null, 2) }}
       <div class="flex flex-col items-center">
         <div>
           <a href="https://vitejs.dev" target="_blank">
@@ -31,7 +32,6 @@ const { microAppCommunicationState } = storeToRefs(
 <style scoped>
 .logo {
   height: 6em;
-  padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
