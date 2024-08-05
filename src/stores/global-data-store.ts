@@ -1,11 +1,11 @@
+import { MicroAppGlobalDataPayload } from "@/generated/proto/micro_app_global_data_payload";
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { GlobalDataPayload } from "../interfaces";
 
 export const useGlobalDataStore = defineStore("globalData", () => {
-  const globalDataState = ref<GlobalDataPayload>({});
+  const globalDataState = ref<MicroAppGlobalDataPayload>({});
 
-  function setGlobalDataState(data: GlobalDataPayload) {
+  function setGlobalDataState(data: MicroAppGlobalDataPayload) {
     globalDataState.value = data;
   }
 

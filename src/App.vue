@@ -4,7 +4,7 @@ import HelloWorld from "./components/HelloWorld.vue";
 import MicroAppContextProvider from "./MicroAppContextProvider.vue";
 import { useGlobalDataStore } from "./stores/global-data-store";
 import { useMicroApp } from "./hooks";
-import { MicroAppCommunicationChannel } from "@/generated/proto/element_pb";
+import { MicroAppCommunicationChannel } from "@/generated/proto/element";
 
 const { globalDataState } = storeToRefs(useGlobalDataStore());
 const { forceDispatch } = useMicroApp();
