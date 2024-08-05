@@ -1,19 +1,32 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import HelloWorld from "./components/HelloWorld.vue";
-import MicroAppContextProvider from "./micro-app/components/MicroAppContextProvider.vue";
-import { useMicroAppCommunicationStore } from "./stores/micro-app-communication-store";
+import MicroAppContextProvider from "./MicroAppContextProvider.vue";
+import { useGlobalDataStore } from "./stores/global-data-store";
+import { useMicroApp } from "./hooks";
+import { MicroAppCommunicationChannel } from "@/generated/proto/element_pb";
 
-const { microAppCommunicationState } = storeToRefs(
-  useMicroAppCommunicationStore()
-);
+const { globalDataState } = storeToRefs(useGlobalDataStore());
+const { forceDispatch } = useMicroApp();
 </script>
 
 <template>
   <MicroAppContextProvider>
     <div class="flex flex-col items-center">
       MicroAppCommunication:
-      {{ JSON.stringify(microAppCommunicationState, null, 2) }}
+      {{ JSON.stringify(globalDataState, null, 2) }}
+
+      <button
+        @click="
+          () =>
+            forceDispatch({
+              payload: { random: Math.random() },
+              channel: MicroAppCommunicationChannel.VUE_MAIN_CHANNEL1,
+            })
+        "
+      >
+        向主应用发送数据
+      </button>
       <div class="flex flex-col items-center">
         <div>
           <a href="https://vitejs.dev" target="_blank">
