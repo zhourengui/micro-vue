@@ -1,29 +1,20 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted } from "vue";
-import { useGlobalDataStore } from "./stores";
-import { GlobalDataPayload, SingleDataPayload } from "./interfaces";
+import { useMicroAppDataHandler } from "./hooks";
 
 defineOptions({ name: "MicroAppContextProvider" });
 
-const globalDataStore = useGlobalDataStore();
-const { setGlobalDataState } = globalDataStore;
-
-function globalDataListener(payload: GlobalDataPayload) {
-  setGlobalDataState(payload);
-}
-
-function dataListener(payload: SingleDataPayload) {
-  alert(`[Vue] 接收到主应用的数据: ${JSON.stringify(payload, null, 2)}`);
-}
+const { microAppDataHandler, microAppGlobalDataHandler } =
+  useMicroAppDataHandler();
 
 onMounted(() => {
-  window.microApp?.addGlobalDataListener?.(globalDataListener, true);
-  window?.microApp?.addDataListener?.(dataListener, true);
+  window.microApp?.addGlobalDataListener?.(microAppGlobalDataHandler, true);
+  window?.microApp?.addDataListener?.(microAppDataHandler, true);
 });
 
 onBeforeUnmount(() => {
-  window.microApp?.removeGlobalDataListener?.(globalDataListener);
-  window?.microApp?.removeDataListener?.(dataListener);
+  window.microApp?.removeGlobalDataListener?.(microAppGlobalDataHandler);
+  window?.microApp?.removeDataListener?.(microAppDataHandler);
 });
 </script>
 
